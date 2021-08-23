@@ -15,13 +15,13 @@ struct Point {
     int x, y;
 };
 
-void Print(std::deque<Point>& d) {
+void Print(const std::deque<Point>& d) {
     for (auto& a : d) {
         std::cout << "x: " << a.x << " y: " << a.y << '\n';
     }
 }
 bool pointXCompare(const Point& lhs, const Point& rhs) {
-    return lhs.x < rhs.x;
+    return lhs.x < rhs.x; 
 }
 
 bool pointYCompare(const Point& lhs, const Point& rhs) {
@@ -32,11 +32,16 @@ int main() {
     std::deque<Point> d = {{1, 3}, {0, 0}, {1, 2}, {2, 4}, {4, 1}, {0, 2}, {2, 2}};
     std::cout << "Inicjalne wywolanie deque:\n";
     Print(d);
-    std::cout << "Po uzyciiu komparatora X:\n";
-    std::sort(begin(d), end(d), pointXCompare);
+    std::cout << "Po uzyciiu komparatora X:\n"; 
+    std::stable_sort(begin(d), end(d), pointXCompare);
     Print(d);
     std::cout << "Po uzyciiu komparatora Y:\n";
     std::sort(begin(d), end(d), pointYCompare);
     Print(d);
+
+    std::cout << "Czy jest posortowane wzglemd X:\n";
+    std::cout << std::boolalpha << std::is_sorted(begin(d), end(d), pointXCompare) << '\n';
+    std::cout << "\nCzy jest posortowane wzglemd Y:\n";
+    std::cout << std::boolalpha << std::is_sorted(begin(d), end(d), pointYCompare) << '\n';
     return 0;
 }
